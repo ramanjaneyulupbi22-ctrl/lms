@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== TOP NAVIGATION BAR ===== -->
+  <header class="navbar">
+    <div class="navbar-brand">
+      <!-- Simple graduation-cap icon drawn with CSS + unicode -->
+      <span class="nav-icon">🎓</span>
+      <span class="nav-title">Student Management System</span>
+    </div>
+    <span class="nav-subtitle">Academic Record Portal</span>
+  </header>
+
+  <!-- ===== MAIN CONTENT WRAPPER ===== -->
+  <main class="container">
+
+    <!-- ===== DASHBOARD STAT CARDS ===== -->
+    <section class="cards-row" aria-label="Summary statistics">
+
+      <div class="card card--blue">
+        <div class="card-icon">👥</div>
+        <div class="card-body">
+          <p class="card-label">Total Students</p>
+          <!-- Updated by JS whenever a student is added / deleted -->
+          <p class="card-value" id="totalStudents">0</p>
+        </div>
+      </div>
+
+      <div class="card card--indigo">
+        <div class="card-icon">🏛️</div>
+        <div class="card-body">
+          <p class="card-label">Total Departments</p>
+          <p class="card-value" id="totalDepts">0</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===== ADD STUDENT FORM PANEL ===== -->
+    <section class="panel" aria-label="Add student form">
+      <h2 class="panel-title">
+        <span class="panel-title-icon">➕</span> Add New Student
+      </h2>
+
+      <form id="studentForm" novalidate>
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="studentName">Student Name <span class="required">*</span></label>
+            <input
+              type="text"
+              id="studentName"
+              placeholder="e.g. Alice Johnson"
+              autocomplete="off"
+            />
+            <!-- Inline error message shown by JS -->
+            <span class="field-error" id="nameError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="rollNumber">Roll Number <span class="required">*</span></label>
+            <input
+              type="text"
+              id="rollNumber"
+              placeholder="e.g. CS-2024-001"
+              autocomplete="off"
+            />
+            <span class="field-error" id="rollError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="department">Department <span class="required">*</span></label>
+            <input
+              type="text"
+              id="department"
+              placeholder="e.g. Computer Science"
+              autocomplete="off"
+            />
+            <span class="field-error" id="deptError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number <span class="required">*</span></label>
+            <input
+              type="tel"
+              id="phone"
+              placeholder="e.g. 9876543210"
+              autocomplete="off"
+            />
+            <span class="field-error" id="phoneError"></span>
+          </div>
+
+        </div><!-- /.form-grid -->
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn--primary" id="addBtn">
+          <span class="btn-icon">➕</span> Add Student
+        </button>
+
+      </form>
+    </section>
+
+    <!-- ===== STUDENT TABLE PANEL ===== -->
+    <section class="panel" aria-label="Student records">
+      <div class="table-header">
+        <h2 class="panel-title">
+          <span class="panel-title-icon">📋</span> Student Records
+        </h2>
+
+        <!-- Search box -->
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search by name or roll number…"
+            aria-label="Search students"
+          />
+        </div>
+      </div>
+
+      <!-- Scrollable table wrapper for small screens -->
+      <div class="table-scroll">
+        <table id="studentTable">
+          <thead>
+            <tr>
+              <th>Roll Number</th>
+              <th>Name</th>
+              <th>Department</th>
+              <th>Phone</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <!-- Rows injected by JS -->
+          <tbody id="studentTableBody"></tbody>
+        </table>
+
+        <!-- Shown when no records match -->
+        <div class="empty-state" id="emptyState">
+          <p class="empty-icon">🎒</p>
+          <p class="empty-text">No students found.</p>
+          <p class="empty-sub">Add a student using the form above or try a different search term.</p>
+        </div>
+      </div>
+
+    </section>
+
+  </main><!-- /.container -->
+
+  <!-- ===== TOAST NOTIFICATION ===== -->
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+  <!-- ===== DELETE CONFIRM DIALOG ===== -->
+  <div class="overlay" id="overlay">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+      <p class="dialog-icon">🗑️</p>
+      <h3 id="dialogTitle">Delete Student?</h3>
+      <p id="dialogMsg" class="dialog-msg">Are you sure you want to remove this student?</p>
+      <div class="dialog-actions">
+        <button class="btn btn--ghost" id="cancelDelete">Cancel</button>
+        <button class="btn btn--danger" id="confirmDelete">Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

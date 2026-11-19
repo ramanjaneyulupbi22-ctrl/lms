@@ -1,0 +1,440 @@
+/* ============================================================
+   Student Management System — stylesheet
+   Theme : blue / white / soft-indigo
+   Approach: custom properties for easy theming, mobile-first
+   ============================================================ */
+
+/* ---------- CSS custom properties (design tokens) ---------- */
+:root {
+  --blue-600:   #2563eb;
+  --blue-700:   #1d4ed8;
+  --blue-50:    #eff6ff;
+  --indigo-600: #4f46e5;
+  --indigo-50:  #eef2ff;
+  --red-600:    #dc2626;
+  --red-50:     #fef2f2;
+  --green-600:  #16a34a;
+  --green-50:   #f0fdf4;
+
+  --text-primary:   #1e293b;
+  --text-secondary: #64748b;
+  --text-muted:     #94a3b8;
+
+  --border:    #e2e8f0;
+  --bg-page:   #f1f5f9;
+  --bg-white:  #ffffff;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,.14);
+
+  --transition: 180ms ease;
+}
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-page);
+  min-height: 100vh;
+}
+
+/* ---------- Navigation bar ---------- */
+.navbar {
+  background: var(--blue-600);
+  color: #fff;
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(37,99,235,.35);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-icon   { font-size: 22px; line-height: 1; }
+.nav-title  { font-size: 18px; font-weight: 700; letter-spacing: -.3px; }
+.nav-subtitle {
+  font-size: 12px;
+  opacity: .75;
+  display: none; /* hidden on mobile */
+}
+@media (min-width: 560px) { .nav-subtitle { display: block; } }
+
+/* ---------- Page container ---------- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+@media (min-width: 768px) { .container { padding: 32px 24px 56px; } }
+
+/* ---------- Stat cards row ---------- */
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: var(--shadow-sm);
+  border-left: 5px solid transparent;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+.card--blue   { border-left-color: var(--blue-600); }
+.card--indigo { border-left-color: var(--indigo-600); }
+
+.card-icon {
+  font-size: 36px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.card-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.card-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+/* ---------- Panels (white box sections) ---------- */
+.panel {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.panel-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.panel-title-icon { font-size: 18px; }
+
+/* ---------- Form ---------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+@media (min-width: 560px) {
+  .form-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .form-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: .2px;
+}
+
+.required { color: var(--red-600); }
+
+.form-group input {
+  padding: 9px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-white);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.form-group input:focus {
+  border-color: var(--blue-600);
+  box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+}
+/* Red border when invalid (class added by JS) */
+.form-group input.invalid {
+  border-color: var(--red-600);
+  box-shadow: 0 0 0 3px rgba(220,38,38,.10);
+}
+
+.field-error {
+  font-size: 12px;
+  color: var(--red-600);
+  min-height: 16px; /* reserves space so layout doesn't jump */
+  font-weight: 500;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  text-decoration: none;
+}
+.btn:active { transform: scale(.97); }
+
+.btn--primary {
+  background: var(--blue-600);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(37,99,235,.30);
+}
+.btn--primary:hover {
+  background: var(--blue-700);
+  box-shadow: 0 4px 12px rgba(37,99,235,.40);
+}
+
+.btn--danger {
+  background: var(--red-600);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(220,38,38,.25);
+}
+.btn--danger:hover { background: #b91c1c; }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border);
+}
+.btn--ghost:hover { background: var(--bg-page); }
+
+/* Small icon-only delete button inside the table */
+.btn--delete {
+  background: var(--red-50);
+  color: var(--red-600);
+  border: 1.5px solid #fecaca;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background var(--transition);
+}
+.btn--delete:hover { background: #fee2e2; }
+
+.btn-icon { font-size: 15px; line-height: 1; }
+
+/* ---------- Table section header ---------- */
+.table-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.table-header .panel-title { margin-bottom: 0; }
+
+/* Search input wrapper */
+.search-wrap {
+  position: relative;
+}
+.search-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  pointer-events: none;
+}
+.search-wrap input[type="search"] {
+  padding: 8px 13px 8px 34px;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;   /* pill shape */
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  width: 240px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.search-wrap input[type="search"]:focus {
+  border-color: var(--blue-600);
+  box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+  width: 280px;
+}
+/* Remove the browser's default "×" clear button on some browsers */
+input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+/* ---------- Table ---------- */
+.table-scroll { overflow-x: auto; }
+
+#studentTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+#studentTable thead tr {
+  background: var(--blue-50);
+}
+
+#studentTable th {
+  text-align: left;
+  padding: 11px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: var(--blue-600);
+  white-space: nowrap;
+  border-bottom: 2px solid var(--border);
+}
+
+#studentTable td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+/* Zebra striping for even rows */
+#studentTable tbody tr:nth-child(even) { background: #f8fafc; }
+
+#studentTable tbody tr:hover { background: var(--blue-50); }
+
+/* Roll number badge style */
+.roll-badge {
+  display: inline-block;
+  background: var(--blue-50);
+  color: var(--blue-600);
+  border: 1px solid #bfdbfe;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  text-align: center;
+  padding: 48px 16px;
+  display: none; /* toggled by JS */
+}
+.empty-icon { font-size: 48px; margin-bottom: 10px; }
+.empty-text { font-weight: 700; font-size: 16px; color: var(--text-primary); }
+.empty-sub  { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+/* ---------- Toast notification ---------- */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  min-width: 240px;
+  max-width: 340px;
+  padding: 13px 18px;
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 300ms, transform 300ms;
+  z-index: 999;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.toast.toast--success { background: var(--green-600); }
+.toast.toast--error   { background: var(--red-600); }
+.toast.toast--info    { background: var(--blue-600); }
+
+/* ---------- Confirm dialog overlay ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms;
+}
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.dialog {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  max-width: 380px;
+  width: calc(100% - 32px);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  transform: scale(.92);
+  transition: transform 200ms;
+}
+.overlay.active .dialog { transform: scale(1); }
+
+.dialog-icon  { font-size: 44px; margin-bottom: 10px; }
+.dialog h3    { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.dialog-msg   { font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; }
+
+.dialog-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* ---------- Utility ---------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
